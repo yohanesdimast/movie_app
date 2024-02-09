@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='container'>
+    <h2 class='pt-4'>{{genre_name}} </h2>
+    <div class="row row-cols-1 row-cols-md-5 g-4 py-3">
+        {% for movie in movies %}
+        <div class='col'>
+            <div class="card card-cover h-100 overflow-hidden rounded-4 shadow-lg">
+                <img src="https://image.tmdb.org/t/p/w342/{{movie.poster_path}}" class="card-img" alt="" width="100%" height="250">
+                <div class="card-body py-1">
+                    <p class="card-text"><a href="{% url "movies:info" movie_id=movie.id %}">{{movie.title}}</a></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if paginate.has_prev %}
+            <li class='page-item'><a class='page-link' href="?page={{paginate.prev_page}}">Prev Page</a></li>
+            {% else %}
+            <li class='page-item disabled'><a class='page-link' href="">Prev Page</a></li>
+            {% endif %}
+
+            <li class='page-item'><a class='page-link' href="?page={{paginate.page_now}}">Page {{paginate.page_now}}</a></li>
+
+            {% if paginate.has_next %}
+            <li class='page-item'><a class='page-link' href="?page={{paginate.next_page}}">Next Page</a></li>
+            {% else %}
+            <li class='page-item disabled'><a class='page-link' href="">Next Page</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+</div>
+{% endblock content %}

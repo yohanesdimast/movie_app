@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class='container mt-4'>
+  <div class="row g-0 bg-body-secondary position-relative">
+    <div class="col-md-3 mb-md-0 p-md-4">
+      <img src="https://image.tmdb.org/t/p/w185/{{info.poster_path}}" alt="">
+    </div>
+    <div class="col-md-9 p-4 ps-md-0">
+      <h5 class="mt-0">{{info.title}}</h5>
+      <p>{{info.tagline}}</p>
+      <p>{{info.overview}}</p>
+      <a href="{% url "movies:reviews" movie_id=movie_id %}">Reviews</a> <br>
+      <form action="" method='post' class='mt-4'>
+        {% csrf_token %}
+        <input type="hidden" name='id' value="{{info.id}}">
+        <input type="hidden" name='title' value="{{info.title}}">
+        <input type="hidden" name='tagline' value="{{info.tagline}}">
+        <input type="hidden" name='genres' value="{{info.genres}}">
+        <input type="hidden" name='poster' value="{{info.poster_path}}">
+        <input type="hidden" name='overview' value="{{info.overview}}">
+        <input type="hidden" name='runtime' value="{{info.runtime}}">
+        <input type="hidden" name='date' value="{{info.release_date}}">
+        <button class='btn btn-primary'>Add to Favorites</button>
+      </form>
+    </div>
+  </div>
+</main>
+<div class='container mt-4 mb-4'>
+  <div class='row'>
+    <div class='col-6 col-md-2'>
+      
+    </div>
+    <div class='col-6 col-md-8'>
+      <div class="ratio ratio-16x9">
+        <iframe width="420" height="315" src="https://www.youtube.com/embed/{{trailer.key}}">asdasdasd</iframe>
+      </div>
+    </div>
+    <div class='col-6 col-md-2'>
+      
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
